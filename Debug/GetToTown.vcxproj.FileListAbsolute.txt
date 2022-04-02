@@ -1,0 +1,2 @@
+C:\Users\Yarin\source\repos\GetToTown\Debug\GetToTown.exe
+C:\Users\Yarin\source\repos\GetToTown\Debug\GetToTown.pdb
