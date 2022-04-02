@@ -1,6 +1,8 @@
 #pragma once
 
 #include <iostream>
+#include <vector>
+using std::vector;
 
 // Array-based list implementation
 class AList {
@@ -8,18 +10,19 @@ class AList {
         int data;
         int next;
     };
-
-    Node* list;
+    
+    vector<Node> list;
     int headList;
     int headFree;
     unsigned int size;
+
 public:
     AList(unsigned int _size) : headList(-1), headFree(0), size(_size){
-        list = new Node[size];
+        list.resize(_size);
         makeEmpty();
     }
 
-    ~AList() { delete[] list; }
+    ~AList() { }
 
     void makeEmpty() {
         for (int i = 0; i < size - 1; i++) {
@@ -31,18 +34,16 @@ public:
     bool isEmpty() { return headList == -1; }
 
     void insert(int data) {
-        if (isEmpty()) {
-            int loc = list[headFree].next;
-            list[headFree].data = data;
+        int loc = list[headFree].next;
+        list[headFree].data = data;
+
+        if (isEmpty()) 
             list[headFree].next = -1;
-            headList = headFree;
-            headFree = loc;
-        }
-        else {
-            list[headFree].data = data;
+        else 
             list[headFree].next = headList;
-            headFree = list[headFree].next;
-        }
+
+        headList = headFree;
+        headFree = loc;
     }
 
     void print() {

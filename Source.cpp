@@ -4,8 +4,8 @@
 #include "AList.h"
 using namespace std;
 
-list<int> createAccessibilityList(vector<list<int>> country, int numOfCities, int cityIndex);
-void getToTownRec(vector<list<int>> country, int cityIndex, vector<bool> &isChecked, list<int> &accessibilityList);
+AList createAccessibilityList(vector<AList> country, int numOfCities, int cityIndex);
+void getToTownRec(vector<AList> country, int cityIndex, vector<bool> &isChecked, AList &accessibilityList);
 
 struct Pair {
 	int from;
@@ -31,40 +31,51 @@ void main() {
 	} while (cityIndex > numOfCities || cityIndex < 0);
 
 	// create country structure
-	vector<list<int>> countryStructure (numOfCities + 1, list<int>());
+	vector<AList> countryStructure (numOfCities + 1, AList(numOfCities + 1));
+
+
 	for (Pair p : connections) {
-		countryStructure[p.from].push_back(p.to);
+		countryStructure[p.from].insert(p.to);
+	}
+
+	for (int i = 0; i < numOfCities + 1; i++) {
+		cout << "Country Array in index: " << i << endl;
+		countryStructure[i].print();
 	}
 
 
 
 
-	list<int> accessList = createAccessibilityList(countryStructure, numOfCities, cityIndex);
+	AList accessList = createAccessibilityList(countryStructure, numOfCities, cityIndex);
 	//auto arr2 = getToTown();
 
 	// print access list
-	list<int>::iterator it;
-	cout << "Accessibility Group:" << endl;
-	for (it = accessList.begin(); it != accessList.end(); ++it)
-		cout << '\t' << *it;
-	cout << '\n';
+	//AList::iterator it;
+	//cout << "Accessibility Group:" << endl;
+	//for (it = accessList.begin(); it != accessList.end(); ++it)
+	//	cout << '\t' << *it;
+	//cout << '\n';
+
+	accessList.print();
 }
 
-list<int> createAccessibilityList(vector<list<int>> country, int numOfCities, int cityIndex) {
-	list<int> accessibilityList; // what is the size ?
+AList createAccessibilityList(vector<AList> country, int numOfCities, int cityIndex) {
+	AList accessibilityList(numOfCities+1); // what is the size ?
 	vector<bool> isChecked(numOfCities + 1, false); // "colors" array
 	getToTownRec(country, cityIndex, isChecked, accessibilityList);
 	return accessibilityList;
 }
 
-void getToTownRec(vector<list<int>> country, int cityIndex, vector<bool> &isChecked, list<int> &accessibilityList) {
+void getToTownRec(vector<AList> country, int cityIndex, vector<bool> &isChecked, AList &accessibilityList) {
 	if (isChecked[cityIndex] == true)
 		return;
 	isChecked[cityIndex] = true;
-	accessibilityList.push_back(cityIndex);
+	accessibilityList.insert(cityIndex);
 
-	list<int>::iterator it;
-	for (it = country[cityIndex].begin(); it != country[cityIndex].end(); ++it) {
-		getToTownRec(country, *it, isChecked, accessibilityList);
+	int currIndex = country[cityIndex].getHeadListIndex();
+	while (currIndex != -1) {
+		int temp = country[cityIndex].value(currIndex);
+		getToTownRec(country, temp, isChecked, accessibilityList);
+		currIndex = country[cityIndex].next(currIndex);
 	}
 }
