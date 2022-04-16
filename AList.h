@@ -6,63 +6,34 @@ using std::vector;
 
 // Array-based list implementation
 class AList {
-    struct Node {
+    struct ANode {
         int data;
         int next;
     };
     
-    vector<Node> list;
+    vector<ANode> list;
     int headList;
+    int tailList;
     int headFree;
     unsigned int size;
 
 public:
-    AList(unsigned int _size) : headList(-1), headFree(0), size(_size){
-        list.resize(_size);
-        makeEmpty();
-    }
+    AList(unsigned int _size);
 
     ~AList() { }
 
-    void makeEmpty() {
-        for (int i = 0; i < size - 1; i++) {
-            list[i].next = i + 1;
-        }
-        list[size - 1].next = -1;
-    }
-
     bool isEmpty() { return headList == -1; }
 
-    void insert(int data) {
-        int loc = list[headFree].next;
-        list[headFree].data = data;
+    int next(int currIndex) { return list[currIndex].next; }
 
-        if (isEmpty()) 
-            list[headFree].next = -1;
-        else 
-            list[headFree].next = headList;
+    int value(int currIndex) { return list[currIndex].data; }
 
-        headList = headFree;
-        headFree = loc;
-    }
+    int getHeadListIndex() { return headList; }
 
-    void print() {
-        int i = headList;
-        while (i != -1) {
-            std::cout << list[i].data << ' ';
-            i = list[i].next;
-        }
-        std::cout << std::endl;
-    }
+    void makeEmpty();
 
-    int next(int currIndex) {
-        return list[currIndex].next;
-    }
+    void insert(int data);
 
-    int value(int currIndex) {
-        return list[currIndex].data;
-    }
-
-    int getHeadListIndex() { return headList;  }
+    void print();
 };
 

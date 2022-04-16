@@ -1,6 +1,5 @@
 ﻿  Source.cpp
-C:\Users\Yarin\source\repos\GetToTown\AList.h(28,27): warning C4018: '<': signed/unsigned mismatch
-C:\Users\Yarin\source\repos\GetToTown\Source.cpp(15,13): warning C4326: return type of 'main' should be 'int' instead of 'void'
-C:\Users\Yarin\source\repos\GetToTown\Source.cpp(23,7): warning C4101: 'from': unreferenced local variable
-C:\Users\Yarin\source\repos\GetToTown\Source.cpp(23,13): warning C4101: 'to': unreferenced local variable
+C:\Users\Yarin\source\repos\GetToTown\Source.cpp(16,13): warning C4326: return type of 'main' should be 'int' instead of 'void'
+C:\Users\Yarin\source\repos\GetToTown\Source.cpp(24,7): warning C4101: 'from': unreferenced local variable
+C:\Users\Yarin\source\repos\GetToTown\Source.cpp(24,13): warning C4101: 'to': unreferenced local variable
   GetToTown.vcxproj -> C:\Users\Yarin\source\repos\GetToTown\Debug\GetToTown.exe

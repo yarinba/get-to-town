@@ -2,10 +2,11 @@
 #include <vector>
 #include <list>
 #include "AList.h"
+#include "List.h"
 using namespace std;
 
-AList createAccessibilityList(vector<AList> country, int numOfCities, int cityIndex);
-void getToTownRec(vector<AList> country, int cityIndex, vector<bool> &isChecked, AList &accessibilityList);
+AList createAccessibilityList(vector<List> country, int numOfCities, int cityIndex);
+void getToTownRec(vector<List> country, int cityIndex, vector<bool> &isChecked, AList &accessibilityList);
 
 struct Pair {
 	int from;
@@ -31,51 +32,35 @@ void main() {
 	} while (cityIndex > numOfCities || cityIndex < 0);
 
 	// create country structure
-	vector<AList> countryStructure (numOfCities + 1, AList(numOfCities + 1));
+	vector<List> countryStructure(numOfCities+1);
 
 
 	for (Pair p : connections) {
 		countryStructure[p.from].insert(p.to);
 	}
 
-	for (int i = 0; i < numOfCities + 1; i++) {
-		cout << "Country Array in index: " << i << endl;
-		countryStructure[i].print();
-	}
-
-
-
-
 	AList accessList = createAccessibilityList(countryStructure, numOfCities, cityIndex);
-	//auto arr2 = getToTown();
-
-	// print access list
-	//AList::iterator it;
-	//cout << "Accessibility Group:" << endl;
-	//for (it = accessList.begin(); it != accessList.end(); ++it)
-	//	cout << '\t' << *it;
-	//cout << '\n';
 
 	accessList.print();
 }
 
-AList createAccessibilityList(vector<AList> country, int numOfCities, int cityIndex) {
+AList createAccessibilityList(vector<List> country, int numOfCities, int cityIndex) {
 	AList accessibilityList(numOfCities+1); // what is the size ?
 	vector<bool> isChecked(numOfCities + 1, false); // "colors" array
 	getToTownRec(country, cityIndex, isChecked, accessibilityList);
 	return accessibilityList;
 }
 
-void getToTownRec(vector<AList> country, int cityIndex, vector<bool> &isChecked, AList &accessibilityList) {
+void getToTownRec(vector<List> country, int cityIndex, vector<bool> &isChecked, AList &accessibilityList) {
 	if (isChecked[cityIndex] == true)
 		return;
 	isChecked[cityIndex] = true;
 	accessibilityList.insert(cityIndex);
 
-	int currIndex = country[cityIndex].getHeadListIndex();
-	while (currIndex != -1) {
-		int temp = country[cityIndex].value(currIndex);
-		getToTownRec(country, temp, isChecked, accessibilityList);
-		currIndex = country[cityIndex].next(currIndex);
+	Node* curr = country[cityIndex].getHead();
+	// Traverse the list.
+	while (curr != NULL) {
+		getToTownRec(country, curr->data, isChecked, accessibilityList);
+		curr = curr->next;
 	}
 }
