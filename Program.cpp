@@ -1,44 +1,91 @@
 #include "Program.h"
 
+/* This function print the accessibility list*/
 void Program::printAccessibilityList(vector<List>& country, int numOfCities, int cityIndex, eFunctionType t) {
 	AList accessibilityList(numOfCities + 1);
 	vector<bool> isChecked(numOfCities + 1, false); // "colors" array
+	
+	cout << "Cities accessible fron source city " << cityIndex << endl;
+
 	if (t == eFunctionType::Iterative)
+	{
 		ia.getToTown(country, cityIndex, isChecked, accessibilityList);
+		cout << "(iterative algorithm): ";
+	}
 	else if (t == eFunctionType::Recursive)
+	{
 		ra.getToTown(country, cityIndex, isChecked, accessibilityList);
+		cout << "(recursive algorithm): ";
+	}
 
 	accessibilityList.print();
+	cout << endl;
 }
 
+/* This function run the recursive and iterative to find the accessibility list*/
 void Program::run() {
-	int numOfCities, numOfConnections;
+	int numOfCities, cityIndex;
 	vector<Pair> connections;
+	bool validCitiesAndConnections, validCityIndex;
+
+	validCitiesAndConnections = getNumOfCitiesAndConnections(numOfCities, connections);
+	validCityIndex = getCityIndex(numOfCities, cityIndex);
+
+	if ((!validCitiesAndConnections) || (!validCityIndex))
+		cout << "Invalid input";
+	else
+	{
+		// create country structure
+		vector<List> countryStructure(numOfCities + 1);
+
+		for (Pair p : connections) {
+			countryStructure[p.from].insert(p.to);
+		}
+
+		// recursive
+		this->printAccessibilityList(countryStructure, numOfCities, cityIndex, eFunctionType::Recursive);
+		// iterative
+		this->printAccessibilityList(countryStructure, numOfCities, cityIndex, eFunctionType::Iterative);
+	}
+}
+
+/* This function get the num of cities in the country and the num of connections and validate them*/
+bool Program:: getNumOfCitiesAndConnections(int& numOfCities, vector<Pair>& connections)
+{
+	int numOfConnections, count = 0;
+	string strConnections;
+	Pair p;
+
 	cin >> numOfCities >> numOfConnections;
 
-	// get input from user
-	for (int i = 0; i < numOfConnections; i++) {
-		Pair p;
-		int from, to;
-		cin >> p.from >> p.to;
-		connections.push_back(p);
+	// Eat the new line
+	getchar();
+	getline(cin, strConnections);
+	std::istringstream is(strConnections);
+
+	while (count < numOfConnections)
+	{
+		if ((is >> p.from) && (is >> p.to))
+		{
+			if ((p.from < 1) || (p.from > numOfCities) || (p.to < 1) || (p.to > numOfCities))
+				return false;
+			connections.push_back(p);
+		}
+		else
+			return false;
+		count++;
 	}
 
-	int cityIndex;
-	do {
-		cin >> cityIndex;
-	} while (cityIndex > numOfCities || cityIndex < 0);
+	if ((count < numOfConnections) || (numOfCities < 1) || (numOfConnections < 0))
+		return false;
 
-	// create country structure
-	vector<List> countryStructure(numOfCities + 1);
+	return true;
+}
 
-
-	for (Pair p : connections) {
-		countryStructure[p.from].insert(p.to);
-	}
-
-	// recursive
-	this->printAccessibilityList(countryStructure, numOfCities, cityIndex, eFunctionType::Recursive);
-	// iterative
-	this->printAccessibilityList(countryStructure, numOfCities, cityIndex, eFunctionType::Iterative);
+bool Program:: getCityIndex(int numOfCities, int& cityIndex)
+{
+	cin >> cityIndex;
+	if (cityIndex > numOfCities || cityIndex < 0)
+		return false;
+	return true;
 }
