@@ -1,10 +1,12 @@
 #include "AList.h"
 
+// AList constructor
 AList::AList(unsigned int _size) : headList(-1), tailList(-1), headFree(0), size(_size) {
     list.resize(_size);
     makeEmpty();
 }
 
+/* This function make the AList empty*/
 void AList::makeEmpty() {
     for (int i = 0; i < size - 1; i++) {
         list[i].next = i + 1;
@@ -12,6 +14,7 @@ void AList::makeEmpty() {
     list[size - 1].next = -1;
 }
 
+/* This function insert new data*/
 void AList::insert(int data) {
     int loc = list[headFree].next;
     list[headFree].data = data;
@@ -26,6 +29,7 @@ void AList::insert(int data) {
     headFree = loc;
 }
 
+/* This function print AList*/
 void AList::print() {
     int i = headList;
     while (i != -1) {

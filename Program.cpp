@@ -60,9 +60,12 @@ bool Program:: getNumOfCitiesAndConnections(int& numOfCities, vector<Pair>& conn
 
 	// Eat the new line
 	getchar();
+
+	// Get the connections
 	getline(cin, strConnections);
 	std::istringstream is(strConnections);
 
+	// Check validation of connections and add them to connections vector
 	while (count < numOfConnections)
 	{
 		if ((is >> p.from) && (is >> p.to))
@@ -76,12 +79,14 @@ bool Program:: getNumOfCitiesAndConnections(int& numOfCities, vector<Pair>& conn
 		count++;
 	}
 
+	// Check validations
 	if ((count < numOfConnections) || (numOfCities < 1) || (numOfConnections < 0))
 		return false;
 
 	return true;
 }
 
+/* This function get the city index and check validatio*/
 bool Program:: getCityIndex(int numOfCities, int& cityIndex)
 {
 	cin >> cityIndex;
