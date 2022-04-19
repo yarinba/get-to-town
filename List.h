@@ -3,21 +3,18 @@
 #include <iostream>
 using namespace std;
 
-// Node class to represent
-// a node of the linked list.
+// Node class
 class Node {
 public:
     int data;
     Node* next;
 
-    // Default constructor
+    // Constructors
     Node()
     {
         data = 0;
         next = NULL;
     }
-
-    // Parameterised Constructor
     Node(int data)
     {
         this->data = data;
@@ -25,28 +22,23 @@ public:
     }
 };
 
-// Linked list class to
-// implement a linked list.
+// Linked list class
 class List {
     Node* head;
 
 public:
-    // Default constructor
+    // Constructor
     List() { head = NULL; }
 
     Node* getHead() { return head; }
 
-    // Function to insert a
-    // node at the end of the
-    // linked list.
+    // Insert node to end of list
     void insert(int);
 
-    // Function to print the
-    // linked list.
+    // Print the list
     void printList();
 
-    // Function to delete the
-    // node at given position
+    // Delete node in given index
     void deleteNode(int);
 };
 

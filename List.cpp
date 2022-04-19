@@ -1,7 +1,6 @@
 #include "List.h"
 
-// Function to delete the
-// node at given position
+// Delete node in given index
 void List::deleteNode(int nodeOffset)
 {
     Node* temp1 = head, * temp2 = NULL;
@@ -12,18 +11,15 @@ void List::deleteNode(int nodeOffset)
         return;
     }
 
-    // Find length of the linked-list.
+    // Find length of the list.
     while (temp1 != NULL) {
         temp1 = temp1->next;
         ListLen++;
     }
 
-    // Check if the position to be
-    // deleted is less than the length
-    // of the linked list.
+    // Check if the index to be deleted is less than the length of the list.
     if (ListLen < nodeOffset) {
-        cout << "Index out of range"
-            << endl;
+        cout << "Index out of range" << endl;
         return;
     }
 
@@ -39,8 +35,7 @@ void List::deleteNode(int nodeOffset)
         return;
     }
 
-    // Traverse the list to
-    // find the node to be deleted.
+    // Find the node to be deleted.
     while (nodeOffset-- > 1) {
 
         // Update temp2
@@ -50,18 +45,17 @@ void List::deleteNode(int nodeOffset)
         temp1 = temp1->next;
     }
 
-    // Change the next pointer
-    // of the previous node.
+    // Change the next pointer of the previous node.
     temp2->next = temp1->next;
 
     // Delete the node
     delete temp1;
 }
 
-// Function to insert a new node.
+// Insert a new node to end
 void List::insert(int data)
 {
-    // Create the new Node.
+    // Create new Node
     Node* newNode = new Node(data);
 
     // Assign to head
@@ -82,8 +76,7 @@ void List::insert(int data)
     temp->next = newNode;
 }
 
-// Function to print the
-// nodes of the linked list.
+// Function to print the nodes of the linked list.
 void List::printList()
 {
     Node* temp = head;

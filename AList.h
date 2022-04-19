@@ -19,21 +19,14 @@ class AList {
 
 public:
     AList(unsigned int _size);
-
-    ~AList() { }
+    ~AList() {}
 
     bool isEmpty() { return headList == -1; }
-
     int next(int currIndex) { return list[currIndex].next; }
-
     int value(int currIndex) { return list[currIndex].data; }
-
     int getHeadListIndex() { return headList; }
-
     void makeEmpty();
-
     void insert(int data);
-
     void print();
 };
 

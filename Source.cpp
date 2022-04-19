@@ -8,4 +8,4 @@ Oz Hayun 209368695
 void main() {
 	Program p;
 	p.run();
-}
+ }

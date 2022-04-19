@@ -1,5 +1,7 @@
 #include "IterativeApproach.h"
 
+/* This function find the accessibility list of requested city index
+   Implemented by stack*/
 void IterativeApproach::getToTown(vector<List>& country, int cityIndex, vector<bool>& isChecked, AList& accessibilityList) {
 	Stack <ItemType> s;
 	s.makeEmpty();
