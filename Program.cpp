@@ -5,17 +5,17 @@ void Program::printAccessibilityList(vector<List>& country, int numOfCities, int
 	AList accessibilityList(numOfCities + 1);
 	vector<bool> isChecked(numOfCities + 1, false); // "colors" array
 	
-	cout << "Cities accessible fron source city " << cityIndex << endl;
+	cout << "Cities accessible fron source city " << cityIndex;
 
 	if (t == eFunctionType::Iterative)
 	{
 		ia.getToTown(country, cityIndex, isChecked, accessibilityList);
-		cout << "(iterative algorithm): ";
+		cout << " (iterative algorithm): ";
 	}
 	else if (t == eFunctionType::Recursive)
 	{
 		ra.getToTown(country, cityIndex, isChecked, accessibilityList);
-		cout << "(recursive algorithm): ";
+		cout << " (recursive algorithm): ";
 	}
 
 	accessibilityList.print();

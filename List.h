@@ -27,8 +27,11 @@ class List {
     Node* head;
 
 public:
-    // Constructor
+    // ctor
     List() { head = NULL; }
+
+    // dctor
+    ~List();
 
     Node* getHead() { return head; }
 

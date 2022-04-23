@@ -1,10 +1,2 @@
-﻿  IterativeApproach.cpp
-  RecursiveApproach.cpp
-  Program.cpp
-C:\Users\Yarin\source\repos\GetToTown\Program.cpp(22,7): warning C4101: 'from': unreferenced local variable
-C:\Users\Yarin\source\repos\GetToTown\Program.cpp(22,13): warning C4101: 'to': unreferenced local variable
-  Source.cpp
-C:\Users\Yarin\source\repos\GetToTown\Source.cpp(3,13): warning C4326: return type of 'main' should be 'int' instead of 'void'
-  Generating Code...
-C:\Users\Yarin\source\repos\GetToTown\Stack.h(23): warning C4715: 'Stack<ItemType>::pop': not all control paths return a value
+﻿  Program.cpp
   GetToTown.vcxproj -> C:\Users\Yarin\source\repos\GetToTown\Debug\GetToTown.exe

@@ -93,3 +93,20 @@ void List::printList()
         temp = temp->next;
     }
 }
+
+// Function to delete the entire linked list
+List::~List() {
+    /* deref head_ref to get the real head */
+    Node* current = head;
+    Node* next = NULL;
+
+    while (current != NULL)
+    {
+        next = current->next;
+        delete current;
+        current = next;
+    }
+
+    /* deref head_ref to affect the real head back in the caller. */
+    head = NULL;
+}
