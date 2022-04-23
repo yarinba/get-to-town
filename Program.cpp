@@ -4,22 +4,22 @@
 void Program::printAccessibilityList(vector<List>& country, int numOfCities, int cityIndex, eFunctionType t) {
 	AList accessibilityList(numOfCities + 1);
 	vector<bool> isChecked(numOfCities + 1, false); // "colors" array
-	
-	cout << "Cities accessible fron source city " << cityIndex << endl;
+
 
 	if (t == eFunctionType::Iterative)
 	{
+		cout << "Cities accessible from city source city " << cityIndex;
 		ia.getToTown(country, cityIndex, isChecked, accessibilityList);
-		cout << "(iterative algorithm): ";
+		cout << " (iterative algorithm): ";
 	}
 	else if (t == eFunctionType::Recursive)
 	{
+		cout << "Cities accessible from source city " << cityIndex;
 		ra.getToTown(country, cityIndex, isChecked, accessibilityList);
-		cout << "(recursive algorithm): ";
+		cout << " (recursive algorithm): ";
 	}
 
 	accessibilityList.print();
-	cout << endl;
 }
 
 /* This function run the recursive and iterative to find the accessibility list*/
@@ -50,7 +50,7 @@ void Program::run() {
 }
 
 /* This function get the num of cities in the country and the num of connections and validate them*/
-bool Program:: getNumOfCitiesAndConnections(int& numOfCities, vector<Pair>& connections)
+bool Program::getNumOfCitiesAndConnections(int& numOfCities, vector<Pair>& connections)
 {
 	int numOfConnections, count = 0;
 	string strConnections;
@@ -80,14 +80,14 @@ bool Program:: getNumOfCitiesAndConnections(int& numOfCities, vector<Pair>& conn
 	}
 
 	// Check validations
-	if ((count < numOfConnections) || (numOfCities < 1) || (numOfConnections < 0))
+	if ((count < numOfConnections) || (numOfCities < 1) || (numOfConnections < 0) || (is >> p.from))
 		return false;
 
 	return true;
 }
 
 /* This function get the city index and check validatio*/
-bool Program:: getCityIndex(int numOfCities, int& cityIndex)
+bool Program::getCityIndex(int numOfCities, int& cityIndex)
 {
 	cin >> cityIndex;
 	if (cityIndex > numOfCities || cityIndex < 0)
